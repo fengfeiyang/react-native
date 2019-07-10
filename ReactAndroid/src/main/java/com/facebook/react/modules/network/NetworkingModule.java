@@ -369,7 +369,9 @@ public final class NetworkingModule extends ReactContextBaseJavaModule {
     // shared under the hood.
     // See https://github.com/square/okhttp/wiki/Recipes#per-call-configuration for more information
     if (timeout != mClient.connectTimeoutMillis()) {
-      clientBuilder.connectTimeout(timeout, TimeUnit.MILLISECONDS);
+      clientBuilder.connectTimeout(timeout, TimeUnit.MILLISECONDS)
+        .writeTimeout(20, TimeUnit.SECONDS)
+        .readTimeout(45, TimeUnit.SECONDS);
     }
     OkHttpClient client = clientBuilder.build();
 
